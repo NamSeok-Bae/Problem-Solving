@@ -3,63 +3,46 @@
 
 using namespace std;
 
-int t; 
 int n;
-string s;
-int arr[64][64];
+int map[65][65];
 
-
-void tree(int x, int y,int k)
+void solve(int x,int y,int k)
 {
-	bool check = true;
-	for (int i = x;i < x + k;i++)
-	{
-		for (int j = y;j < y + k;j++)
-		{
-			if (arr[x][y] != arr[i][j])
-			{
-				check = false;
-				break;
-			}
-		}
-		if (!check)
-			break;
-	}
-	if (check)
-	{
-		if (arr[x][y] == 0)
-		{
-			cout << 0;
-			return;
-		}
-		else if (arr[x][y] == 1)
-		{
-			cout << 1;
-			return;
-		}
-	}
-	else {
-		cout << "(";
-		tree(x, y, k / 2);
-		tree(x, y + k / 2, k / 2);
-		tree(x + k / 2, y, k / 2);
-		tree(x + k / 2, y + k / 2, k / 2);
-		cout << ")";
-	}
-	return;
+    int zero = 0;
+    for(int i=y;i<y+k;i++)
+    {
+        for(int j=x; j<x+k;j++)
+        {
+            if(map[i][j]==0)
+                zero++;
+        }
+    }
+    if(zero==k*k)
+        cout<<0;
+    else if(zero==0)
+        cout<<1;
+    else
+    {
+        cout<<"(";
+        solve(x,y,k/2);
+        solve(x+k/2,y,k/2);
+        solve(x,y+k/2,k/2);
+        solve(x+k/2,y+k/2,k/2);
+        cout<<")";
+    }
 }
 
 int main()
 {
-	cin >> t;
-	for (int i = 0; i < t;i++)
-	{
-		cin >> s;
-		for (int j = 0;j < t;j++)
-		{
-			arr[i][j] = s[j] - '0';
-		}
-	}
-	tree(0,0,t);
-	return 0;
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        string s;
+        cin>>s;
+        for(int j=0;j<n;j++)
+        {
+            map[i][j] = s[j]-'0';
+        }
+    }
+    solve(0,0,n);
 }
