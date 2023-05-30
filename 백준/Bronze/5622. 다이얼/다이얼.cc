@@ -1,63 +1,27 @@
 #include <iostream>
-#include<string>
+#include <map>
 
 using namespace std;
 
-int main()
-{
-	string a;
-	char b[26];
-	int num = 65;
-	int sum = 0;
-	cin >> a;
-
-	for (int i = 0;i<26;i++)
-	{
-		b[i] = num;
-		num++;
-	}
-
-	for (int i = 0; i < a.length();i++)
-	{
-		for (int j = 0;j < 26;j++)
-		{
-			if (a[i] == b[j])
-			{
-				if (j <= 2)
-				{
-					sum += 2;
-				}
-				else if (j <= 5)
-				{
-					sum += 3;
-				}
-				else if (j <= 8)
-				{
-					sum += 4;
-				}
-				else if (j <= 11)
-				{
-					sum += 5;
-				}
-				else if (j <= 14)
-				{
-					sum += 6;
-				}
-				else if (j <= 18)
-				{
-					sum += 7;
-				}
-				else if (j <= 21)
-				{
-					sum += 8;
-				}
-				else if (j <= 25)
-				{
-					sum += 9;
-				}
-			}
-		}
-		sum += 1;
-	}
-	cout << sum;
+int main() {
+    string s;
+    cin>>s;
+    
+    map<char, int> m;
+    
+    m['A'] = m['B'] = m['C'] = 2;
+    m['D'] = m['E'] = m['F'] = 3;
+    m['G'] = m['H'] = m['I'] = 4;
+    m['J'] = m['K'] = m['L'] = 5;
+    m['M'] = m['N'] = m['O'] = 6;
+    m['P'] = m['Q'] = m['R'] = m['S'] = 7;
+    m['T'] = m['U'] = m['V'] = 8;
+    m['W'] = m['X'] = m['Y'] = m['Z'] = 9;
+    
+    int sum = 0;
+    for(int i=0;i<s.size();i++) {
+        sum += m[s[i]];
+        sum++;
+    }
+    cout<<sum;
 }
